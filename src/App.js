@@ -5,7 +5,7 @@ function App() {
 
   useEffect(() => {
     fetch(
-      "https://collectionapi.metmuseum.org/public/collection/v1/objects/437133"
+      "https://collectionapi.metmuseum.org/public/collection/v1/objects/436533"
     )
       .then((response) => response.json())
       .then((jsonData) => setData(jsonData))
@@ -24,9 +24,10 @@ function App() {
       <div>
         <h2>Title: {data.title}</h2>
         <p>Artist: {data.artistDisplayName}</p>
-        <p>Period: {data.period}</p>
+        <p>Created: {data.objectDate}</p>
         <p>Medium: {data.medium}</p>
-        <p>Country: {data.country}</p>
+        <p>Country: {data.artistNationality}</p>
+        <img src={data.primaryImage}></img>
       </div>
     </div>
   );
