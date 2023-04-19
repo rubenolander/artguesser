@@ -1,4 +1,5 @@
-function ArtistGuesser() {
+import ImageFinder from "../ImageFinder/ImageFinder";
+const ArtistGuesser = (props) => {
   const artistData = [
     {
       id: 0,
@@ -7,10 +8,16 @@ function ArtistGuesser() {
       born: 1853,
       died: 1890,
     },
-    { id: 1, artistName: "Goya", era: "Romanticism", born: 1746, died: 1828 },
+    {
+      id: 1,
+      artistName: "Goya (Francisco de Goya y Lucientes)",
+      era: "Romanticism",
+      born: 1746,
+      died: 1828,
+    },
     {
       id: 2,
-      artistName: "Rousseau",
+      artistName: "Henri Rousseau (le Douanier)",
       era: "Romanticism",
       born: 1844,
       died: 1910,
@@ -27,7 +34,8 @@ function ArtistGuesser() {
     <section>
       <select>{options}</select>
       <button>Guess</button>
+      <h2>Answer: {props.artistName}</h2>
     </section>
   );
-}
+};
 export default ArtistGuesser;
