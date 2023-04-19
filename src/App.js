@@ -2,10 +2,12 @@
 import "./App.css";
 import ImageFinder from "./components/ImageFinder/ImageFinder";
 import ArtistGuesser from "./components/ArtistGuesser/ArtistGuesser";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
-    <div>
+    <div className="container">
+      <Header />
       <ImageFinder />
     </div>
   );

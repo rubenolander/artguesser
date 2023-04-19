@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArtistGuesser from "../ArtistGuesser/ArtistGuesser";
+import './imageFinder.css';
 
 function ImageFinder() {
   const [data, setData] = useState([]);
@@ -66,23 +67,13 @@ function ImageFinder() {
 
   return (
     <div className="App">
-      <p>Object id: {data.objectID}</p>
-      <h1>ARTGUESSER GUESS ART</h1>
-      <h2>WHO ART THOU?</h2>
-      <div>
-        <h2>Title: {data.title}</h2>
-        <p>Artist: {data.artistDisplayName}</p>
-        <p>Created: {data.objectDate}</p>
-        <p>
-          Artist life: {data.artistBeginDate} - {data.artistEndDate}
-        </p>
-
-        <p>Medium: {data.medium}</p>
-        <p>Artist nationality: {data.artistNationality}</p>
+      <div className="">
+        <div className="image-container">
         <img src={data.primaryImage} alt={data.title}></img>
-      </div>
-      <button onClick={fetchData}>New artist</button>
+        </div>
       <ArtistGuesser correctAnswer={correctAnswer} />
+      </div>
+      <button onClick={fetchData}>Play again</button>
     </div>
   );
 }

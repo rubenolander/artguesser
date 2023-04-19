@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import ImageFinder from "../ImageFinder/ImageFinder";
 const ArtistGuesser = (props) => {
   const artistData = [
@@ -24,81 +25,79 @@ const ArtistGuesser = (props) => {
       born: 1844,
       died: 1910,
       nationality: "French",
-    },
-    {
-      id: 3,
-      artistName: "Thomas Cole",
-      era: "Romanticism",
-      born: 1801,
-      died: 1848,
-      nationality: "English/American",
-    },
-    {
-      id: 4,
-      artistName: "Giovanni Bellini",
-      era: "Renaissance",
-      born: 1430,
-      died: 1516,
-      nationality: "Italian",
-    },
-    {
-      id: 5,
-      artistName: "Andrea del Sarto (Andrea d'Agnolo)",
-      era: "Renaissance",
-      born: 1486,
-      died: 1530,
-      nationality: "Italian",
-    },
-    {
-      id: 6,
-      artistName: "Gustave Courbet",
-      era: "Realism",
-      born: 1819,
-      died: 1877,
-      nationality: "French",
-    },
-    {
-      id: 7,
-      artistName: "James Hamilton",
-      era: "Realism",
-      born: 1808,
-      died: 1870,
-    },
-    {
-      id: 8,
-      artistName: "Asher Brown Durand",
-      era: "Romanticism",
-      born: 1796,
-      died: 1886,
-    },
-    {
-      id: 9,
-      artistName: "James McNeill Whistler",
-      era: "Impressionism",
-      born: 1834,
-      died: 1903,
-    },
-    {
-      id: 10,
-      artistName: "Nicolas Poussin",
-      era: "Baroque",
-      born: 1594,
-      died: 1665,
-    },
+    },{
+    id: 3,
+    artistName: "Thomas Cole",
+    era: "Romanticism",
+    born: 1801,
+    died: 1848,
+    nationality: "English/American",
+  },
+  {
+    id: 4,
+    artistName: "Giovanni Bellini",
+    era: "Renaissance",
+    born: 1430,
+    died: 1516,
+    nationality: "Italian",
+  },
+  {
+    id: 5,
+    artistName: "Andrea del Sarto (Andrea d'Agnolo)",
+    era: "Renaissance",
+    born: 1486,
+    died: 1530,
+    nationality: "Italian",
+  },
+  {
+    id: 6,
+    artistName: "Gustave Courbet",
+    era: "Realism",
+    born: 1819,
+    died: 1877,
+    nationality: "French",
+  },
+  {
+    id: 7,
+    artistName: "James Hamilton",
+    era: "Realism",
+    born: 1808,
+    died: 1870,
+  },
+  {
+    id: 8,
+    artistName: "Asher Brown Durand",
+    era: "Romanticism",
+    born: 1796,
+    died: 1886,
+  },
+  {
+    id: 9,
+    artistName: "James McNeill Whistler",
+    era: "Impressionism",
+    born: 1834,
+    died: 1903,
+  },
+  {
+    id: 10,
+    artistName: "Nicolas Poussin",
+    era: "Baroque",
+    born: 1594,
+    died: 1665,
+  },
+
   ];
 
-  let correctArtistId = 1000;
+  let correctArtistId = null;
   artistData.forEach((artist) => {
     if (props.correctAnswer === artist.artistName) {
       correctArtistId = artist.id;
+      console.log(correctArtistId);               // REMOVE ON BUILD
+      console.log(artistData[correctArtistId]);   // -||-
       return correctArtistId;
     }
   });
 
-  console.log(correctArtistId);
-  console.log(artistData[correctArtistId]);
-
-  //måste det verkligen vara en map här? Kan man inte ta den ordinarie arrayen och skapa en option för varje objekt i arrayen?
   const options = artistData.map((artist) => (
     <option key={artist.id} value={artist.id}>
       {artist.artistName}
@@ -108,18 +107,32 @@ const ArtistGuesser = (props) => {
   function guess() {
     const guess = document.querySelector("select").value;
     const artistGuess = artistData[guess].artistName;
+    const divGrid = document.querySelector('.div-grid');
+    // skapa divar i en grid med datan från en gubbe
+    
+
     console.log(artistGuess);
     if (artistGuess === props.correctAnswer) {
       alert("Correct!");
+      // måla divarna och sätt pilar beroende på om svaret är för högt/lågt/nära
     } else {
       alert("Incorrect!");
     }
   }
 
+  function createGridItem()
+  {
+
+  }
+
   return (
     <section>
-      <select>{options}</select>
+      <select>
+      <option value="" disabled selected>Who art thou?</option>
+        {options}
+        </select>
       <button onClick={guess}>Guess</button>
+      <section className="div-grid"></section>
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );

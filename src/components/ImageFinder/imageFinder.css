@@ -1,0 +1,11 @@
+section {
+margin: 0.3rem 0
+}
+section select {
+    width: 50%;
+    height: 2rem;
+}
+section button {
+    width: 20%;
+    height: 2rem;
+}
