@@ -16,28 +16,29 @@ function ImageFinder() {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      fetch(getRandomArtist())
-        .then((response) => response.json())
-        .then((data) => {
-          const { objectIDs } = data;
-          const randomIndex = Math.floor(Math.random() * objectIDs.length);
-          const randomObjectId = objectIDs[randomIndex];
-          console.log(randomObjectId); // will log a random objectId from the array
-          return randomObjectId;
-        })
-        .then((randomObjectId) => {
-          return fetch(
-            `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomObjectId}`
-          );
-        })
-        .then((response) => response.json())
-        .then((jsonData) => setData(jsonData))
-        .catch((error) => console.error(error))
-        .finally(() => console.log("done"));
-    };
     fetchData();
   }, []);
+
+  function fetchData() {
+    fetch(getRandomArtist())
+      .then((response) => response.json())
+      .then((data) => {
+        const { objectIDs } = data;
+        const randomIndex = Math.floor(Math.random() * objectIDs.length);
+        const randomObjectId = objectIDs[randomIndex];
+        console.log(randomObjectId); // will log a random objectId from the array
+        return randomObjectId;
+      })
+      .then((randomObjectId) => {
+        return fetch(
+          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomObjectId}`
+        );
+      })
+      .then((response) => response.json())
+      .then((jsonData) => setData(jsonData))
+      .catch((error) => console.error(error))
+      .finally(() => console.log("done"));
+  }
 
   return (
     <div className="App">
@@ -56,6 +57,7 @@ function ImageFinder() {
         <p>Artist nationality: {data.artistNationality}</p>
         <img src={data.primaryImage} alt={data.title}></img>
       </div>
+      <button onClick={fetchData}>New artist</button>
     </div>
   );
 }
