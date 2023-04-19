@@ -3,10 +3,11 @@ const ArtistGuesser = (props) => {
   const artistData = [
     {
       id: 0,
-      artistName: "Vincent Van Gogh",
+      artistName: "Vincent van Gogh",
       era: "Expressionism",
       born: 1853,
       died: 1890,
+      nationality: "Dutch",
     },
     {
       id: 1,
@@ -14,6 +15,7 @@ const ArtistGuesser = (props) => {
       era: "Romanticism",
       born: 1746,
       died: 1828,
+      nationality: "Spanish",
     },
     {
       id: 2,
@@ -21,6 +23,7 @@ const ArtistGuesser = (props) => {
       era: "Romanticism",
       born: 1844,
       died: 1910,
+      nationality: "French",
     },
   ];
 
@@ -30,10 +33,21 @@ const ArtistGuesser = (props) => {
     </option>
   ));
 
+  function guess() {
+    const guess = document.querySelector("select").value;
+    const artistGuess = artistData[guess].artistName;
+    console.log(artistGuess);
+    if (artistGuess === props.artistName) {
+      alert("Correct!");
+    } else {
+      alert("Incorrect!");
+    }
+  }
+
   return (
     <section>
       <select>{options}</select>
-      <button>Guess</button>
+      <button onClick={guess}>Guess</button>
       <h2>Answer: {props.artistName}</h2>
     </section>
   );
