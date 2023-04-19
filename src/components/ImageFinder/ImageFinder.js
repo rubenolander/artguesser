@@ -41,7 +41,7 @@ function ImageFinder() {
       .finally(() => console.log("done"));
   }
 
-  let artistName = data.artistDisplayName;
+  let correctAnswer = data.artistDisplayName;
 
   return (
     <div className="App">
@@ -50,7 +50,7 @@ function ImageFinder() {
       <h2>WHO ART THOU?</h2>
       <div>
         <h2>Title: {data.title}</h2>
-        <p>Artist: {artistName}</p>
+        <p>Artist: {data.artistDisplayName}</p>
         <p>Created: {data.objectDate}</p>
         <p>
           Artist life: {data.artistBeginDate} - {data.artistEndDate}
@@ -61,7 +61,7 @@ function ImageFinder() {
         <img src={data.primaryImage} alt={data.title}></img>
       </div>
       <button onClick={fetchData}>New artist</button>
-      <ArtistGuesser artistName={artistName} />
+      <ArtistGuesser correctAnswer={correctAnswer} />
     </div>
   );
 }

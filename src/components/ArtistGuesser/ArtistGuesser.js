@@ -37,7 +37,7 @@ const ArtistGuesser = (props) => {
     const guess = document.querySelector("select").value;
     const artistGuess = artistData[guess].artistName;
     console.log(artistGuess);
-    if (artistGuess === props.artistName) {
+    if (artistGuess === props.correctAnswer) {
       alert("Correct!");
     } else {
       alert("Incorrect!");
@@ -48,7 +48,7 @@ const ArtistGuesser = (props) => {
     <section>
       <select>{options}</select>
       <button onClick={guess}>Guess</button>
-      <h2>Answer: {props.artistName}</h2>
+      <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
 };
