@@ -1,7 +1,17 @@
+.gridContainer{
+display: flex;
+flex-direction: column;
+}
+
+.gridGuessItems{
+  display:flex;
+  flex-direction: row;
+}
+
 .gridItemWrong {
   width: 5rem;
   height: 5rem;
-  background-color: #ff0000;
+  background-color: #c61212;
   color: black;
   border: 1px solid black;
 }
@@ -9,7 +19,7 @@
 .gridItemRight {
   width: 5rem;
   height: 5rem;
-  background-color: #00ff00;
+  background-color: #1aca1a;
   color: black;
   border: black;
 }

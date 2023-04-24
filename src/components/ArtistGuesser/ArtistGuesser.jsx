@@ -1,5 +1,3 @@
-import { createElement } from "react";
-import ImageFinder from "../ImageFinder/ImageFinder";
 import "./ArtistGuesser.css";
 const ArtistGuesser = (props) => {
   const artistData = [
@@ -105,23 +103,29 @@ const ArtistGuesser = (props) => {
     </option>
   ));
 
+  let guesses = null;
+
   function guess() {
     const guess = document.querySelector("select").value;
     const artistGuessData = artistData[guess];
     const artistGuess = artistData[guess].artistName;
-    const divGrid = document.querySelector(".divGrid");
-    // skapa divar i en grid med datan från en gubbe
-
+    const guessGridItems = document.createElement('section');
+    guessGridItems.classList.add('gridGuessItems');
+    const gridContainer = document.querySelector('.gridContainer');
+    gridContainer.append(guessGridItems);
+// skapa divar i en grid med datan från en gubbe
+    guesses ++;
     console.log(artistGuess);
     if (artistGuess === props.correctAnswer) {
       alert("Correct!");
       // måla divarna och sätt pilar beroende på om svaret är för högt/lågt/nära
     } else {
       for (const key in artistGuessData) {
-        if (artistGuessData[key] === artistData[correctArtistId][key]) {
-          createGridItemRight(divGrid);
+        if (key === "id" || key === "artistName"){continue}
+        else if (artistGuessData[key] === artistData[correctArtistId][key]) {
+          createGridItemRight(guessGridItems);
         } else {
-          createGridItemWrong(divGrid);
+          createGridItemWrong(guessGridItems);
         }
       }
     }
@@ -129,16 +133,16 @@ const ArtistGuesser = (props) => {
 
   //skapar en röd ruta nu när man gissar fel. ska skapa en grid med röda rutor
 
-  function createGridItemWrong(divGrid) {
+  function createGridItemWrong(guessGridItems) {
     const gridItemWrong = document.createElement("div");
     gridItemWrong.className = "gridItemWrong";
-    divGrid.appendChild(gridItemWrong);
+    guessGridItems.appendChild(gridItemWrong);
   }
 
-  function createGridItemRight(divGrid) {
+  function createGridItemRight(guessGridItems) {
     const gridItemRight = document.createElement("div");
     gridItemRight.className = "gridItemRight";
-    divGrid.appendChild(gridItemRight);
+    guessGridItems.appendChild(gridItemRight);
   }
 
   return (
@@ -150,7 +154,8 @@ const ArtistGuesser = (props) => {
         {options}
       </select>
       <button onClick={guess}>Guess</button>
-      <section className="divGrid"></section>
+      <section className="gridContainer">
+      </section>
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
