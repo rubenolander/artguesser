@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArtistGuesser from "../ArtistGuesser/ArtistGuesser";
-import './imageFinder.css';
+import "./imageFinder.css";
 
 function ImageFinder() {
   const [data, setData] = useState([]);
@@ -37,7 +37,6 @@ function ImageFinder() {
         const { objectIDs } = data;
         const randomIndex = Math.floor(Math.random() * objectIDs.length);
         const randomObjectId = objectIDs[randomIndex];
-        console.log(randomObjectId); // will log a random objectId from the array
         return randomObjectId;
       })
       .then((randomObjectId) => {
@@ -58,21 +57,31 @@ function ImageFinder() {
           setShowedPaintings((prevState) => [...prevState, jsonData.objectID]);
         }
       })
-      .catch((error) => console.error(error))
-      .finally(() => console.log("done"));
+      .catch((error) => console.error(error));
   }
 
   let correctAnswer = data.artistDisplayName;
+
+  function handleClick() {
+    if (document.querySelectorAll(".gridGuessItems").length > 0) {
+      const gridGuessItems = document.querySelectorAll(".gridGuessItems");
+      gridGuessItems.forEach((element) => {
+        element.remove();
+      });
+      fetchData();
+    }
+    fetchData();
+  }
 
   return (
     <div className="App">
       <div className="">
         <div className="image-container">
-        <img src={data.primaryImage} alt={data.title}></img>
+          <img src={data.primaryImage} alt={data.title}></img>
         </div>
-      <ArtistGuesser correctAnswer={correctAnswer} />
+        <ArtistGuesser correctAnswer={correctAnswer} />
       </div>
-      <button onClick={fetchData}>Play again</button>
+      <button onClick={handleClick}>Play again</button>
     </div>
   );
 }

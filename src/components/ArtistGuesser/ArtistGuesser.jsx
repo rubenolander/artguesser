@@ -1,5 +1,10 @@
+import { useState } from "react";
 import "./ArtistGuesser.css";
+
 const ArtistGuesser = (props) => {
+  let [guesses, setGuesses] = useState([Number(0)]);
+
+  //vi borde ha artistData i en annan komponent och skicka ner den som props (har börjat lite men lyckades inte helt!)
   const artistData = [
     {
       id: 0,
@@ -95,8 +100,6 @@ const ArtistGuesser = (props) => {
   artistData.forEach((artist) => {
     if (props.correctAnswer === artist.artistName) {
       correctArtistId = artist.id;
-      console.log(correctArtistId); // REMOVE ON BUILD
-      console.log(artistData[correctArtistId]); // -||-
       return correctArtistId;
     }
   });
@@ -107,9 +110,8 @@ const ArtistGuesser = (props) => {
     </option>
   ));
 
-  let guesses = null;
-
   function guess() {
+    setGuesses(Number(guesses) + 1);
     const guess = document.querySelector("select").value;
     const artistGuessData = artistData[guess];
     const artistGuess = artistData[guess].artistName;
@@ -118,8 +120,6 @@ const ArtistGuesser = (props) => {
     const gridContainer = document.querySelector(".gridContainer");
     gridContainer.append(guessGridItems);
     // skapa divar i en grid med datan från en gubbe
-    guesses++;
-    console.log(artistGuessData);
     if (artistGuess === props.correctAnswer) {
       alert("You guessed right!");
       for (const key in artistGuessData) {
@@ -136,25 +136,16 @@ const ArtistGuesser = (props) => {
         if (key === "id" || key === "artistName") {
           continue;
         } else if (artistGuessData[key] === artistData[correctArtistId][key]) {
-          // createGridItemRight(guessGridItems);
           createGridItemRight(
             guessGridItems,
             artistGuessData[key],
             artistData[correctArtistId][key]
           );
-          console.log(artistGuessData[key], artistData[correctArtistId][key]);
         } else {
-          // createGridItemWrong(guessGridItems);
           createGridItemWrong(
             guessGridItems,
             artistGuessData[key],
             artistData[correctArtistId][key]
-          );
-          console.log(
-            "Guess " +
-              artistGuessData[key] +
-              " Right answer " +
-              artistData[correctArtistId][key]
           );
         }
       }
@@ -167,7 +158,6 @@ const ArtistGuesser = (props) => {
     const gridItemWrong = document.createElement("div");
     gridItemWrong.className = "gridItemWrong";
     const pTag = document.createElement("p");
-    console.log(key);
 
     if (typeof key === "number") {
       if (key > correctAnswer) {
@@ -203,6 +193,7 @@ const ArtistGuesser = (props) => {
       <button onClick={guess}>Guess</button>
       <h2>Era, birthyear, date of death, nationality</h2>
       <section className="gridContainer"></section>
+      <h2 className="guessAmount">Guesses: {guesses}</h2>
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
