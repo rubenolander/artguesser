@@ -21,6 +21,7 @@
 }
 
 .gridItemRight {
+  display: flex;
   width: 8rem;
   height: 5rem;
   background-color: #1aca1a;
