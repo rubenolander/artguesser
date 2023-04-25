@@ -1,25 +1,32 @@
-.gridContainer{
-display: flex;
-flex-direction: column;
+.gridContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.gridGuessItems{
-  display:flex;
+.gridGuessItems {
+  display: flex;
   flex-direction: row;
 }
 
 .gridItemWrong {
-  width: 5rem;
+  display: flex;
+  width: 8rem;
   height: 5rem;
   background-color: #c61212;
   color: black;
   border: 1px solid black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .gridItemRight {
-  width: 5rem;
+  width: 8rem;
   height: 5rem;
   background-color: #1aca1a;
   color: black;
-  border: black;
+  border: 1px solid black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
