@@ -119,8 +119,9 @@ const ArtistGuesser = (props) => {
     gridContainer.append(guessGridItems);
     // skapa divar i en grid med datan från en gubbe
     guesses++;
-    console.log(artistGuess);
+    console.log(artistGuessData);
     if (artistGuess === props.correctAnswer) {
+      alert("You guessed right!");
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
           continue;
