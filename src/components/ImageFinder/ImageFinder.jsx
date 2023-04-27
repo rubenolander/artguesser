@@ -30,34 +30,31 @@ function ImageFinder() {
     fetchData();
   }, []);
 
-  function fetchData() {
-    fetch(getRandomArtist())
-      .then((response) => response.json())
-      .then((data) => {
-        const { objectIDs } = data;
-        const randomIndex = Math.floor(Math.random() * objectIDs.length);
-        const randomObjectId = objectIDs[randomIndex];
-        return randomObjectId;
-      })
-      .then((randomObjectId) => {
-        return fetch(
-          `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomObjectId}`
-        ).then((response) => response.json());
-      })
-      .then((jsonData) => {
-        if (
-          jsonData.message === "Not a valid object" ||
-          jsonData.message === "ObjectID not found" ||
-          jsonData.primaryImage === "" ||
-          showedPaintings.includes(jsonData.objectID)
-        ) {
-          fetchData();
-        } else {
-          setData(jsonData);
-          setShowedPaintings((prevState) => [...prevState, jsonData.objectID]);
-        }
-      })
-      .catch((error) => console.error(error));
+  async function fetchData() {
+    try {
+      const response = await fetch(getRandomArtist());
+      const data = await response.json();
+      const { objectIDs } = data;
+      const randomIndex = Math.floor(Math.random() * objectIDs.length);
+      const randomObjectId = objectIDs[randomIndex];
+      const jsonData = await fetch(
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomObjectId}`
+      ).then((response) => response.json());
+
+      if (
+        jsonData.message === "Not a valid object" ||
+        jsonData.message === "ObjectID not found" ||
+        jsonData.primaryImage === "" ||
+        showedPaintings.includes(jsonData.objectID)
+      ) {
+        await fetchData();
+      } else {
+        setData(jsonData);
+        setShowedPaintings((prevState) => [...prevState, jsonData.objectID]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
   function hideLabels() {
     const labels = document.querySelector(".labels");
@@ -67,15 +64,16 @@ function ImageFinder() {
   let correctAnswer = data.artistDisplayName;
 
   function handleClick() {
+    fetchData();
     hideLabels();
+
+    // något knas med denna if sats
     if (document.querySelectorAll(".gridGuessItems").length > 0) {
       const gridGuessItems = document.querySelectorAll(".gridGuessItems");
       gridGuessItems.forEach((element) => {
         element.remove();
       });
-      fetchData();
     }
-    fetchData();
   }
 
   return (
