@@ -79,7 +79,12 @@ function ImageFinder() {
 
   function fullScreen() {
     const imageContainer = document.querySelector("img");
-    imageContainer.requestFullscreen();
+
+    if (document.fullscreenElement === null) {
+      imageContainer.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
   }
 
   return (

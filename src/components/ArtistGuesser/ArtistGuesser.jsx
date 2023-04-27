@@ -132,7 +132,6 @@ const ArtistGuesser = (props) => {
       <section className="gridContainer"></section>
 
       {/* remove on build */}
-
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
