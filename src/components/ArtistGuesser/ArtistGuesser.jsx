@@ -20,14 +20,12 @@ const ArtistGuesser = (props) => {
   ));
 
   function guess() {
-    console.log("guess");
     setGuesses(Number(guesses) + 1);
     if (guesses >= 0) {
       const labels = document.querySelector(".labels");
       labels.classList.remove("hidden");
     }
     const guessValue = document.querySelector("select").value;
-    const guessButton = document.querySelector(".guessButton");
     const artistGuessData = artistData[guessValue];
     const artistGuess = artistData[guessValue].artistName;
     const guessGridItems = document.createElement("section");
@@ -37,7 +35,8 @@ const ArtistGuesser = (props) => {
     // skapa divar i en grid med datan från en gubbe
     if (artistGuess === props.correctAnswer) {
       alert("You guessed right!");
-      guessButton.disabled = true;
+      disableGuessButton();
+      setGuesses(Number(0));
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
           continue;
@@ -103,6 +102,11 @@ const ArtistGuesser = (props) => {
     guessButton.classList.remove("hidden");
   }
 
+  function disableGuessButton() {
+    const guessButton = document.querySelector(".guessButton");
+    guessButton.classList.add("hidden");
+  }
+
   return (
     <section className="width">
       <select defaultValue="" onChange={enableGuessButton}>
@@ -122,7 +126,9 @@ const ArtistGuesser = (props) => {
         <span>Nationality</span>
       </h2>
       <section className="gridContainer"></section>
-      <h2 className="guessAmount">Guesses: {guesses}</h2>
+
+      {/* remove on build */}
+      <h2> guesses = {guesses}</h2>
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
