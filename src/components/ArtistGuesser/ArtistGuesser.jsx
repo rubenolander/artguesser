@@ -1,102 +1,11 @@
 import { useState } from "react";
 import "./ArtistGuesser.css";
+import artistData from "./data";
 
 const ArtistGuesser = (props) => {
   let [guesses, setGuesses] = useState([Number(0)]);
-
-  //vi borde ha artistData i en annan komponent och skicka ner den som props (har börjat lite men lyckades inte helt!)
-  const artistData = [
-    {
-      id: 0,
-      artistName: "Vincent van Gogh",
-      era: "Expressionism",
-      born: 1853,
-      died: 1890,
-      nationality: "Dutch",
-    },
-    {
-      id: 1,
-      artistName: "Goya (Francisco de Goya y Lucientes)",
-      era: "Romanticism",
-      born: 1746,
-      died: 1828,
-      nationality: "Spanish",
-    },
-    {
-      id: 2,
-      artistName: "Henri Rousseau (le Douanier)",
-      era: "Romanticism",
-      born: 1844,
-      died: 1910,
-      nationality: "French",
-    },
-    {
-      id: 3,
-      artistName: "Thomas Cole",
-      era: "Romanticism",
-      born: 1801,
-      died: 1848,
-      nationality: "English/American",
-    },
-    {
-      id: 4,
-      artistName: "Giovanni Bellini",
-      era: "Renaissance",
-      born: 1430,
-      died: 1516,
-      nationality: "Italian",
-    },
-    {
-      id: 5,
-      artistName: "Andrea del Sarto (Andrea d'Agnolo)",
-      era: "Renaissance",
-      born: 1486,
-      died: 1530,
-      nationality: "Italian",
-    },
-    {
-      id: 6,
-      artistName: "Gustave Courbet",
-      era: "Realism",
-      born: 1819,
-      died: 1877,
-      nationality: "French",
-    },
-    {
-      id: 7,
-      artistName: "James Hamilton",
-      era: "Realism",
-      born: 1808,
-      died: 1870,
-      nationality: "Irish",
-    },
-    {
-      id: 8,
-      artistName: "Asher Brown Durand",
-      era: "Romanticism",
-      born: 1796,
-      died: 1886,
-      nationality: "American",
-    },
-    {
-      id: 9,
-      artistName: "James McNeill Whistler",
-      era: "Impressionism",
-      born: 1834,
-      died: 1903,
-      nationality: "American",
-    },
-    {
-      id: 10,
-      artistName: "Nicolas Poussin",
-      era: "Baroque",
-      born: 1594,
-      died: 1665,
-      nationality: "French",
-    },
-  ];
-
   let correctArtistId = null;
+
   artistData.forEach((artist) => {
     if (props.correctAnswer === artist.artistName) {
       correctArtistId = artist.id;
@@ -111,16 +20,16 @@ const ArtistGuesser = (props) => {
   ));
 
   function guess() {
+    console.log("guess");
     setGuesses(Number(guesses) + 1);
-    
     if (guesses >= 0) {
       const labels = document.querySelector(".labels");
       labels.classList.remove("hidden");
-    };
-
-    const guess = document.querySelector("select").value;
-    const artistGuessData = artistData[guess];
-    const artistGuess = artistData[guess].artistName;
+    }
+    const guessValue = document.querySelector("select").value;
+    const guessButton = document.querySelector(".guessButton");
+    const artistGuessData = artistData[guessValue];
+    const artistGuess = artistData[guessValue].artistName;
     const guessGridItems = document.createElement("section");
     guessGridItems.classList.add("gridGuessItems");
     const gridContainer = document.querySelector(".gridContainer");
@@ -128,6 +37,7 @@ const ArtistGuesser = (props) => {
     // skapa divar i en grid med datan från en gubbe
     if (artistGuess === props.correctAnswer) {
       alert("You guessed right!");
+      guessButton.disabled = true;
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
           continue;
@@ -135,7 +45,6 @@ const ArtistGuesser = (props) => {
           createGridItemRight(guessGridItems, artistGuessData[key]);
         }
       }
-
       // måla divarna och sätt pilar beroende på om svaret är för högt/lågt/nära
     } else {
       for (const key in artistGuessData) {
@@ -188,16 +97,30 @@ const ArtistGuesser = (props) => {
     guessGridItems.appendChild(gridItemRight);
   }
 
+  //i want to create an eventlisterner that enables the guess button when you select an option
+  function enableGuessButton() {
+    const guessButton = document.querySelector(".guessButton");
+    guessButton.classList.remove("hidden");
+  }
+
   return (
     <section className="width">
-      <select>
-        <option value="" disabled selected>
+      <select defaultValue="" onChange={enableGuessButton}>
+        <option value="" disabled>
           Who art thou?
         </option>
         {options}
       </select>
-      <button onClick={guess}>Guess</button>
-      <h2 className="labels hidden"> <span>Era</span><span>Year of birth</span><span>Year of death</span><span>Nationality</span></h2>
+      <button className="guessButton hidden" onClick={guess}>
+        Guess
+      </button>
+      <h2 className="labels hidden">
+        {" "}
+        <span>Era</span>
+        <span>Year of birth</span>
+        <span>Year of death</span>
+        <span>Nationality</span>
+      </h2>
       <section className="gridContainer"></section>
       <h2 className="guessAmount">Guesses: {guesses}</h2>
       <h2>Answer: {props.correctAnswer}</h2>

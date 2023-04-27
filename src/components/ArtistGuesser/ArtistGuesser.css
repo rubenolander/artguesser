@@ -31,16 +31,24 @@
   align-items: center;
   justify-content: center;
 }
-.labels{
+.labels {
   display: flex;
   justify-content: space-between;
 }
-.hidden{
+.hidden {
   display: none;
 }
-.labels :first-child{
+.labels :first-child {
   margin-right: 10%;
 }
-.width{
+.width {
   min-width: 100%;
+}
+
+.guessButton.hidden {
+  display: none;
+}
+
+.guessButton {
+  display: inline;
 }
