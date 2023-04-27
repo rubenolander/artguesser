@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./ArtistGuesser.css";
 import artistData from "./data";
+import Button from "../Button/Button";
 
 const ArtistGuesser = (props) => {
   let [guesses, setGuesses] = useState([Number(0)]);
@@ -119,9 +120,8 @@ const ArtistGuesser = (props) => {
         </option>
         {options}
       </select>
-      <button className="guessButton hidden" onClick={guess}>
-        Guess
-      </button>
+      <Button className="guessButton hidden" onClick={guess} text="Guess" />
+
       <h2 className="labels hidden">
         {" "}
         <span>Era</span>

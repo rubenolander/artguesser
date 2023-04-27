@@ -1,21 +1,24 @@
-body{
+body {
   background-color: #e2dede;
-  margin:0;
+  margin: 0;
   box-sizing: border-box;
 }
+
+/* tänk till lite här hur dessa ska stylas */
 .image-container {
   width: 60vh;
   height: 60vh;
   display: flex;
-justify-content: center;
+  justify-content: center;
 }
 img {
-  max-width: 60vh;
-  max-height: 60vh;
+  width: 100%;
+  height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
 }
-.container{
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;

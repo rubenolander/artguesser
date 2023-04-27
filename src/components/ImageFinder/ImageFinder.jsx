@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ArtistGuesser from "../ArtistGuesser/ArtistGuesser";
 import "./imageFinder.css";
+import Button from "../Button/Button";
 
 function ImageFinder() {
   const [data, setData] = useState([]);
@@ -76,15 +77,25 @@ function ImageFinder() {
     }
   }
 
+  function fullScreen() {
+    const imageContainer = document.querySelector("img");
+    imageContainer.requestFullscreen();
+  }
+
   return (
     <div className="App">
       <div className="primary-container">
         <div className="image-container">
-          <img src={data.primaryImage} alt={data.title}></img>
+          <img
+            src={data.primaryImage}
+            alt={data.title}
+            onClick={fullScreen}
+            className="fullscreen-image"
+          ></img>
         </div>
         <ArtistGuesser correctAnswer={correctAnswer} />
       </div>
-      <button onClick={handleClick}>Play again</button>
+      <Button onClick={handleClick} text="Play again" />
     </div>
   );
 }
