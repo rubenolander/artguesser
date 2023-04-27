@@ -22,8 +22,7 @@ const ArtistGuesser = (props) => {
   function guess() {
     setGuesses(Number(guesses) + 1);
     if (guesses >= 0) {
-      const labels = document.querySelector(".labels");
-      labels.classList.remove("hidden");
+      showLabels();
     }
     const guessValue = document.querySelector("select").value;
     const artistGuessData = artistData[guessValue];
@@ -107,6 +106,11 @@ const ArtistGuesser = (props) => {
     guessButton.classList.add("hidden");
   }
 
+  function showLabels() {
+    const labels = document.querySelector(".labels");
+    labels.classList.remove("hidden");
+  }
+
   return (
     <section className="width">
       <select defaultValue="" onChange={enableGuessButton}>
@@ -128,7 +132,7 @@ const ArtistGuesser = (props) => {
       <section className="gridContainer"></section>
 
       {/* remove on build */}
-      <h2> guesses = {guesses}</h2>
+
       <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );

@@ -59,10 +59,15 @@ function ImageFinder() {
       })
       .catch((error) => console.error(error));
   }
+  function hideLabels() {
+    const labels = document.querySelector(".labels");
+    labels.classList.add("hidden");
+  }
 
   let correctAnswer = data.artistDisplayName;
 
   function handleClick() {
+    hideLabels();
     if (document.querySelectorAll(".gridGuessItems").length > 0) {
       const gridGuessItems = document.querySelectorAll(".gridGuessItems");
       gridGuessItems.forEach((element) => {
