@@ -112,6 +112,12 @@ const ArtistGuesser = (props) => {
 
   function guess() {
     setGuesses(Number(guesses) + 1);
+    
+    if (guesses >= 0) {
+      const labels = document.querySelector(".labels");
+      labels.classList.remove("hidden");
+    };
+
     const guess = document.querySelector("select").value;
     const artistGuessData = artistData[guess];
     const artistGuess = artistData[guess].artistName;
@@ -183,7 +189,7 @@ const ArtistGuesser = (props) => {
   }
 
   return (
-    <section>
+    <section className="width">
       <select>
         <option value="" disabled selected>
           Who art thou?
@@ -191,7 +197,7 @@ const ArtistGuesser = (props) => {
         {options}
       </select>
       <button onClick={guess}>Guess</button>
-      <h2>Era, birthyear, date of death, nationality</h2>
+      <h2 className="labels hidden"> <span>Era</span><span>Year of birth</span><span>Year of death</span><span>Nationality</span></h2>
       <section className="gridContainer"></section>
       <h2 className="guessAmount">Guesses: {guesses}</h2>
       <h2>Answer: {props.correctAnswer}</h2>

@@ -31,3 +31,16 @@
   align-items: center;
   justify-content: center;
 }
+.labels{
+  display: flex;
+  justify-content: space-between;
+}
+.hidden{
+  display: none;
+}
+.labels :first-child{
+  margin-right: 10%;
+}
+.width{
+  min-width: 100%;
+}

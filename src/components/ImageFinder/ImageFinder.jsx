@@ -75,7 +75,7 @@ function ImageFinder() {
 
   return (
     <div className="App">
-      <div className="">
+      <div className="primary-container">
         <div className="image-container">
           <img src={data.primaryImage} alt={data.title}></img>
         </div>

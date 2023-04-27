@@ -3,5 +3,6 @@
     font-weight: 900;
 }
 .header h2{
-
+ display: flex;
+ justify-content: space-evenly;
 }
