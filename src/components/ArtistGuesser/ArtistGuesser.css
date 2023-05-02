@@ -44,6 +44,9 @@
 .width {
   min-width: 100%;
 }
+.width select{
+  width: 75%;
+}
 
 .guessButton.hidden {
   display: none;
@@ -51,4 +54,5 @@
 
 .guessButton {
   display: inline;
+  width: 25%;
 }

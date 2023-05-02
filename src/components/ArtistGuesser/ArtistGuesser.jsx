@@ -44,7 +44,6 @@ const ArtistGuesser = (props) => {
           createGridItemRight(guessGridItems, artistGuessData[key]);
         }
       }
-      // måla divarna och sätt pilar beroende på om svaret är för högt/lågt/nära
     } else {
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
@@ -66,18 +65,17 @@ const ArtistGuesser = (props) => {
     }
   }
 
-  //skapar en röd ruta nu när man gissar fel. ska skapa en grid med röda rutor
 
   function createGridItemWrong(guessGridItems, key, correctAnswer) {
     const gridItemWrong = document.createElement("div");
     gridItemWrong.className = "gridItemWrong";
-    const pTag = document.createElement("p");
+    const pTag = document.createElement("h3");
 
     if (typeof key === "number") {
       if (key > correctAnswer) {
-        pTag.textContent = key + "v";
+        pTag.textContent = "\u2193" + key + "\u2193";
       } else if (key < correctAnswer) {
-        pTag.textContent = key + "^";
+        pTag.textContent = "\u2191" + key + "\u2191";
       }
     } else {
       pTag.textContent = key;
@@ -90,13 +88,13 @@ const ArtistGuesser = (props) => {
   function createGridItemRight(guessGridItems, key) {
     const gridItemRight = document.createElement("div");
     gridItemRight.className = "gridItemRight";
-    const pTag = document.createElement("p");
+    const pTag = document.createElement("h3");
     pTag.textContent = key;
     gridItemRight.appendChild(pTag);
     guessGridItems.appendChild(gridItemRight);
   }
 
-  //i want to create an eventlisterner that enables the guess button when you select an option
+  //Create an eventlistener that enables the guess button when you select an option
   function enableGuessButton() {
     const guessButton = document.querySelector(".guessButton");
     guessButton.classList.remove("hidden");
@@ -116,7 +114,7 @@ const ArtistGuesser = (props) => {
     <section className="width">
       <select defaultValue="" onChange={enableGuessButton}>
         <option value="" disabled>
-          Who art thou?
+          Who art thou? 
         </option>
         {options}
       </select>
@@ -131,8 +129,6 @@ const ArtistGuesser = (props) => {
       </h2>
       <section className="gridContainer"></section>
 
-      {/* remove on build */}
-      <h2>Answer: {props.correctAnswer}</h2>
     </section>
   );
 };
