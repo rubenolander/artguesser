@@ -6,6 +6,7 @@
 .gridGuessItems {
   display: flex;
   flex-direction: row;
+  align-self: center;
 }
 
 .gridItemWrong {
@@ -40,9 +41,6 @@
 }
 .labels :first-child {
   margin-right: 10%;
-}
-.width {
-  min-width: 100%;
 }
 .width select {
   width: 75%;

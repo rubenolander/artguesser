@@ -31,7 +31,7 @@ const ArtistGuesser = (props) => {
     const guessGridItems = document.createElement("section");
     guessGridItems.classList.add("gridGuessItems");
     const gridContainer = document.querySelector(".gridContainer");
-    gridContainer.append(guessGridItems);
+    gridContainer.prepend(guessGridItems);
     // skapa divar i en grid med datan från en gubbe
     if (artistGuess === props.correctAnswer) {
       alert("You guessed right!");

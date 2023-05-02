@@ -14,8 +14,8 @@ section select {
 
 /* tänk till lite här hur dessa ska stylas */
 .image-container {
-  width: 60vh;
-  height: 60vh;
+  width: 50vw;
+  height: 50vh;
   display: flex;
   justify-content: center;
   cursor: pointer;
