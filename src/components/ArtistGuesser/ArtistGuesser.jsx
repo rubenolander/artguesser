@@ -37,6 +37,7 @@ const ArtistGuesser = (props) => {
       alert("You guessed right!");
       disableGuessButton();
       setGuesses(Number(0));
+      enablePlayAgain();
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
           continue;
@@ -64,7 +65,6 @@ const ArtistGuesser = (props) => {
       }
     }
   }
-
 
   function createGridItemWrong(guessGridItems, key, correctAnswer) {
     const gridItemWrong = document.createElement("div");
@@ -105,6 +105,12 @@ const ArtistGuesser = (props) => {
     guessButton.classList.add("hidden");
   }
 
+  function enablePlayAgain() {
+    const playAgainButton = document.querySelector(".playAgainButton");
+    playAgainButton.classList.remove("hidden");
+    console.log(playAgainButton);
+  }
+
   function showLabels() {
     const labels = document.querySelector(".labels");
     labels.classList.remove("hidden");
@@ -114,7 +120,7 @@ const ArtistGuesser = (props) => {
     <section className="width">
       <select defaultValue="" onChange={enableGuessButton}>
         <option value="" disabled>
-          Who art thou? 
+          Who art thou?
         </option>
         {options}
       </select>
@@ -128,7 +134,6 @@ const ArtistGuesser = (props) => {
         <span>Nationality</span>
       </h2>
       <section className="gridContainer"></section>
-
     </section>
   );
 };

@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 function ImageFinder() {
   const [data, setData] = useState([]);
   const [showedPaintings, setShowedPaintings] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
 
   const artistsApis = [
     "https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&medium=Paintings&artistOrCulture=true&q=Vincent%20Van%20Gogh",
@@ -51,6 +52,7 @@ function ImageFinder() {
         await fetchData();
       } else {
         setData(jsonData);
+        setCorrectAnswer(jsonData.artistDisplayName);
         setShowedPaintings((prevState) => [...prevState, jsonData.objectID]);
       }
     } catch (error) {
@@ -62,9 +64,15 @@ function ImageFinder() {
     labels.classList.add("hidden");
   }
 
-  let correctAnswer = data.artistDisplayName;
+  function disablePlayAgainButton() {
+    const playAgainButton = document.querySelector(".playAgainButton");
+    playAgainButton.classList.add("hidden");
+  }
+  //Gör denna till en setstate?
+  // let correctAnswer = data.artistDisplayName;
 
   function handleClick() {
+    disablePlayAgainButton();
     fetchData();
     hideLabels();
 
@@ -98,9 +106,13 @@ function ImageFinder() {
             className="fullscreen-image"
           ></img>
         </div>
+        <Button
+          className="playAgainButton hidden"
+          onClick={handleClick}
+          text="Play again"
+        />
         <ArtistGuesser correctAnswer={correctAnswer} />
       </div>
-      <Button onClick={handleClick} text="Play again" />
     </div>
   );
 }

@@ -2,3 +2,21 @@ button {
   width: 20%;
   height: 2rem;
 }
+.playAgainButton.hidden {
+  display: none;
+}
+
+.playAgainButton {
+  display: unset;
+  width: 25%;
+  background-color: #1aca1a;
+}
+
+.guessButton.hidden {
+  display: none;
+}
+
+.guessButton {
+  display: inline;
+  width: 25%;
+}
