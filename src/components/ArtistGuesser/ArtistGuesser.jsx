@@ -34,7 +34,6 @@ const ArtistGuesser = (props) => {
     gridContainer.prepend(guessGridItems);
     // skapa divar i en grid med datan från en gubbe
     if (artistGuess === props.correctAnswer) {
-      alert("You guessed right!");
       disableGuessButton();
       setGuesses(Number(0));
       enablePlayAgain();
