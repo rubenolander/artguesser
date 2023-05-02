@@ -107,7 +107,6 @@ const ArtistGuesser = (props) => {
   function enablePlayAgain() {
     const playAgainButton = document.querySelector(".playAgainButton");
     playAgainButton.classList.remove("hidden");
-    console.log(playAgainButton);
   }
 
   function showLabels() {
