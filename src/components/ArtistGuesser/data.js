@@ -29,7 +29,7 @@ const artistData = [
     era: "Romanticism",
     born: 1801,
     died: 1848,
-    nationality: "English/American",
+    nationality: "English",
   },
   {
     id: 4,
