@@ -7,19 +7,21 @@ const ArtistGuesser = (props) => {
   let [guesses, setGuesses] = useState([Number(0)]);
   let correctArtistId = null;
 
+  //from the correctanswer from the API find the correct artist id from the data.js file
   artistData.forEach((artist) => {
     if (props.correctAnswer === artist.artistName) {
       correctArtistId = artist.id;
       return correctArtistId;
     }
   });
-
+  //create the options for the select element
   const options = artistData.map((artist) => (
     <option key={artist.id} value={artist.id}>
       {artist.artistName}
     </option>
   ));
 
+  //function for the guess artist
   function guess() {
     setGuesses(Number(guesses) + 1);
     if (guesses >= 0) {
@@ -32,7 +34,7 @@ const ArtistGuesser = (props) => {
     guessGridItems.classList.add("gridGuessItems");
     const gridContainer = document.querySelector(".gridContainer");
     gridContainer.prepend(guessGridItems);
-    // skapa divar i en grid med datan från en gubbe
+    // if you guess right enable the playagain button reset the guesses and create the grid items for the right answer
     if (artistGuess === props.correctAnswer) {
       disableGuessButton();
       setGuesses(Number(0));
@@ -44,6 +46,7 @@ const ArtistGuesser = (props) => {
           createGridItemRight(guessGridItems, artistGuessData[key]);
         }
       }
+      //if you guess wrong create the grid items for the wrong answer
     } else {
       for (const key in artistGuessData) {
         if (key === "id" || key === "artistName") {
@@ -64,7 +67,7 @@ const ArtistGuesser = (props) => {
       }
     }
   }
-
+  //create the grid items for the wrong answers
   function createGridItemWrong(guessGridItems, key, correctAnswer) {
     const gridItemWrong = document.createElement("div");
     gridItemWrong.className = "gridItemWrong";
@@ -83,7 +86,7 @@ const ArtistGuesser = (props) => {
     gridItemWrong.appendChild(pTag);
     guessGridItems.appendChild(gridItemWrong);
   }
-
+  //create the grid items for the correct answer
   function createGridItemRight(guessGridItems, key) {
     const gridItemRight = document.createElement("div");
     gridItemRight.className = "gridItemRight";
@@ -98,17 +101,17 @@ const ArtistGuesser = (props) => {
     const guessButton = document.querySelector(".guessButton");
     guessButton.classList.remove("hidden");
   }
-
+  //Disable it again when you have guessed right
   function disableGuessButton() {
     const guessButton = document.querySelector(".guessButton");
     guessButton.classList.add("hidden");
   }
-
+  //when you guess right, enable the play again button
   function enablePlayAgain() {
     const playAgainButton = document.querySelector(".playAgainButton");
     playAgainButton.classList.remove("hidden");
   }
-
+  //show the labels when you have guessed
   function showLabels() {
     const labels = document.querySelector(".labels");
     labels.classList.remove("hidden");
