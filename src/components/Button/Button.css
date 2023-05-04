@@ -12,6 +12,8 @@ button {
   background-color: #1aca1a;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .guessButton.hidden {
